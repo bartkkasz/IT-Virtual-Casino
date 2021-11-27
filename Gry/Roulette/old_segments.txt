@@ -1,0 +1,88 @@
+       /* 1: "Green 0",  //
+        2: "Black 26", //
+        3: "Red 3",    //
+        4: "Black 35", //
+        5: "Red 12",   //
+        6: "Black 28", //
+        7: "Red 7",
+        8: "Black 29",
+        9: "Red 18",
+        10: "Black 22",
+        11: "Red 9",
+        12: "Black 31",
+        13: "Red 14",
+        14: "Black 20",
+        15: "Red 1",
+        16: "Black 33",
+        17: "Red 16",
+        18: "Black 24",
+        19: "Red 5",
+        20: "Black 10",
+        21: "Red 23",
+        22: "Black 8",
+        23: "Red 30",
+        24: "Black 11",
+        25: "Red 36",
+        26: "Black 13",
+        27: "Red 27",
+        28: "Black 6",
+        29: "Red 34",
+        30: "Black 17",
+        31: "Red 25",
+        32: "Black 2",
+        33: "Red 21",
+        34: "Black 4",
+        35: "Red 19",
+        36: "Black 15",
+        37: "Red 32",
+        */
+
+
+
+    var redSegments = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37];
+    var blackSegments = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36];
+
+
+        /*
+        if(colorBet == 'red'){
+            if(redSegments.includes(winningSymbolNr)) {
+            betResult.innerHTML = "You've won!";
+        }
+            else 
+            betResult.innerHTML = "You've lost!"
+        }
+        else if(colorBet == 'black'){
+            if(blackSegments.includes(winningSymbolNr)){
+            betResult.innerHTML = "You've won!"
+        }
+            else
+            betResult.innerHTML = "You've lost!"
+        }
+        else if(colorBet == 'green'){
+            if(winningSymbolNr=='1') {
+            betResult.innerHTML = "You've won!"
+        }
+            else
+            betResult.innerHTML = "You've lost!"
+        }
+        */
+
+
+
+
+        
+       1: "Green 0",
+       2: "Red 13",
+       3: "Black 2",
+       4: "Red 11",
+       5: "Black 8",
+       6: "Red 1",
+       7: "Black 14",
+       8: "Red 9",
+       9: "Black 4",
+       10: "Red 5",
+       11: "Black 12",
+       12: "Red 7",
+       13: "Black 6",
+       14: "Red 3",
+       15: "Black 10",

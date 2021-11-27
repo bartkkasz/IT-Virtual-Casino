@@ -1,0 +1,42 @@
+<!--This is a comment. Comments are not displayed in the browser-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewpor t" content="width=device-width, initial-scale=1.0">
+  <title>Roulette</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div id="roulette_game">
+  <img class="ball" src="/Gry/Roulette/assets/ballcircle.png"/> 
+  <img class="wheel" src="/Gry/Roulette/assets/rouletteWheel.png" />
+  <div class="result">-</div>
+  <div class="previousResult">-</div>
+  <div class="betResult">-</div>
+  <div class ="yourBet">Your Bet</div>
+  <button class="startButton">SPIN!</button>
+  <button class="redWin"></button>
+  <button class="blackWin"></button>
+  <button class="greenWin"></button>
+  
+  <form id = "betting">
+    <input type = "number" id="betAmount" name="betAmount" min="0" required>
+    <input type="submit" id="submitButton" value="BET!">
+  </form>
+  
+</div>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="script.js"></script>
+<script src="balance.js"></script>
+
+</body>
+</html>
+
+
+<!--  <form class = "betting">
+    <input type = "text" id="betAmount" name="betAmount">
+    <input type="button" id='confirmBet' value="BET!">
+  </form>-->

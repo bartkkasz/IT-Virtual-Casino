@@ -1,0 +1,29 @@
+<!--This is a comment. Comments are not displayed in the browser-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky stripes</title>
+    <link rel="stylesheet" href="ls_styles.css">
+</head>
+<body>    
+<div id="lucky_stripes_game">
+    <img class="background"/>
+    <img class="frame" src="./assets/layout.png"/>
+    <img class="leftImage" src="./assets/coin_2.png"/>
+    <img class="middleImage" src="./assets/fruit_2.png"/>
+    <img class="rightImage" src="./assets/bell_2.png"/>
+    <div class="betResult">-</div>
+    <button class="startButton">SPIN!</button>
+    <form id = "betting">
+        <input type = "number" id="betAmount" name="betAmount" min="0" required>
+        <input type="submit" id="submitButton" value="BET!">
+      </form>
+
+</div>
+
+<script src="ls_script.js"></script>
+</body>
+</html>
