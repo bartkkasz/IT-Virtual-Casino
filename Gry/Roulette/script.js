@@ -21,10 +21,20 @@
     var resultColor;
     var betTextResult = '-';
     var form;
+    var user_balance;
+    var flag = 1;
 
-    
 
 
+    //retrieve value from php
+
+    jQuery( document ).ready(function($) {
+       // console.log( current_user_balance.balance_to_pass );
+        user_balance = current_user_balance.balance_to_pass;
+        var input = document.getElementById("betAmount");
+        input.setAttribute("max",user_balance);
+        console.log(user_balance);
+    });
     startTime = new Date();
 
 
@@ -55,7 +65,7 @@
     var blackSegments = [2,4,6,8,10,12,14];
 
 
-    $("#submitButton").attr("disabled", true);
+    jQuery("#submitButton").attr("disabled", true);
     
     ball.addEventListener('transitionend', () => {
         var endTime = new Date();
@@ -65,7 +75,7 @@
         var actualDeg = 360-((deg + wheelDeg + previousWheelDeg)%360);
         showResult(actualDeg, colorBet); 
         wheel.style.animationPlayState = 'paused';
-        if(betTextResult == "WIN"){
+        if(betTextResult == "WIN" && colorBet!='green'){
             betResult.style.backgroundColor="gold";
                 var link="https://dev-virtualcasino.pantheonsite.io/wp-admin/admin-ajax.php";   
                 var formDataWin = new FormData;
@@ -80,6 +90,22 @@
 
         
                 });
+        }
+        else if (betTextResult=="WIN" && colorBet=='green'){
+            betResult.style.backgroundColor="gold";
+            var link="https://dev-virtualcasino.pantheonsite.io/wp-admin/admin-ajax.php";   
+            var formDataWin = new FormData;
+            formDataWin.append('action','betWinGreen');
+            formDataWin.append('betWinGreen', form);
+            jQuery.ajax({
+                url:link,
+                data:formDataWin,
+                processData:false,
+                contentType:false,
+                type:'post',
+
+    
+            });
         }
         else if (betTextResult == "LOSE"){
             betResult.style.backgroundColor="brown";
@@ -139,7 +165,7 @@
 
         ball.style.transition = 'none';
         ball.style.transform = `rotate(${0}deg)`;
-        $("#submitButton").attr("disabled", true);
+        $("#submitButton").attr("disabled", false);
         previousWheelDeg = (wheelDeg+previousWheelDeg)%360;
         wheel.style.animationPlayState = 'running';
         startTime = new Date();
@@ -211,4 +237,6 @@
             type:'post',
 
         })
+
+    
     });
