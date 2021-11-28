@@ -5,7 +5,7 @@ var middleImage = document.querySelector('.middleImage');
 var rightImage = document.querySelector('.rightImage');
 
 var betResult = document.querySelector('.betResult');
-
+var previousResult = document.querySelector('.previousResult');
 var leftIMG;
 var middleIMG;
 var rightIMG;
@@ -21,6 +21,7 @@ jQuery("#submitButton").attr("disabled", false);
 var time = 300;
 var i = 0;
 var j = 0;
+var g = 0;
 var form;
 
 
@@ -28,12 +29,12 @@ function showLeftImage(){
     leftImage.src=images[i];
     leftIMG = Math.floor(0 + Math.random() * 3);
     leftImage.src = images[leftIMG];
-    if(j<15){
+    if(i<15){
     setTimeout(showLeftImage, time);
-    j++;
+    i++;
     }
     else{
-    j = 0;
+    i = 0;
     }
 }
 
@@ -55,15 +56,16 @@ function showRightImage(){
     rightImage.src=images[i];
     rightIMG = Math.floor(0 + Math.random() * 3);
     rightImage.src = images[rightIMG];
-    if(j<20){
+    if(g<25){
     setTimeout(showRightImage, time);
-    j++;
+    g++;
     }
-    else if(j==20) {
+    else if(g==25) {
     showResult(leftIMG,middleIMG,rightIMG);
     rightImage.style.transition = 'all 1s linear';
-    rightImage.style.transform = `rotate(${1}deg)`;
-    j = 0;
+    rightImage.style.transform = `rotate(${0.1}deg)`;
+    g = 0;
+    setTimeout(revertState, 2000);
     }
 }
 
@@ -91,9 +93,17 @@ function showResult(leftIMG, middleIMG, rightIMG){
       betResult.innerHTML = "You've lost!";
       betResult.style.backgroundColor="brown";
     }
-      $("#submitButton").attr("disabled", false);
+
+
 }
 
+function revertState(){
+  rightImage.style.transition = 'all 0s linear';
+  rightImage.style.transform = `rotate(${0}deg)`;
+  betResult.innerHTML = "-";
+  betResult.style.backgroundColor="darkmagenta";
+  $("#submitButton").attr("disabled", false);
+}
 
 
 jQuery('#betting').submit(function(){
