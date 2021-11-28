@@ -183,24 +183,9 @@ add_action('wp_ajax_betWin', 'ajax_betWin');
 
 add_action('wp_ajax_betWinGreen', 'ajax_betWinGreen');
 
-/*function php_to_js_enqueue() {
-    $current_balance_to_pass = array();
-    global $wpdb;
-    global $user;
-    $user = wp_get_current_user();
-    $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
-    $current_balance_decoded = json_decode(json_encode($current_balance),true);
-    $current_balance_value = $current_balance_decoded[0]['balance'];
-    $current_balance_to_pass['balance_to_pass'] = $current_balance_value;
-    wp_enqueue_script( 'php-to-js', plugins_url( 'https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/script1.js', __FILE__ ), array( 'jquery' ), null, true );
-    wp_localize_script( 'php-to-js', 'current_user_balance', $current_balance_to_pass );
-}
-add_action( 'wp_enqueue_scripts', 'php_to_js_enqueue' );
-*/
 
 function ajax_betAmount(){
 	$arr=[];
-    $error_var = '1';
     wp_parse_str($_POST['betAmount'], $arr);
     global $wpdb;
     global $user;
