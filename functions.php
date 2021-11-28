@@ -237,7 +237,7 @@ function ajax_betWin(){
 
 function ajax_betWinGreen(){
     $arr=[];
-    wp_parse_str($_POST['betWin'], $arr);
+    wp_parse_str($_POST['betWinGreen'], $arr);
     global $wpdb;
     global $user;
 	$user = wp_get_current_user();
@@ -250,5 +250,56 @@ function ajax_betWinGreen(){
     $data_where = array('ID'=>$user->ID);
     if($flag>0){
     $result=$wpdb->update($table,["balance"=>$balance_to_set], $data_where);
+    }
+}
+/*
+if(is_page(1)){
+add_action( 'wp_enqueue_scripts', 'php_to_js_enqueue' );
+function php_to_js_enqueue() {
+    $balance_to_pass = array();
+    global $wpdb;
+    global $user;
+	$user = wp_get_current_user();
+    $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+    $current_balance_decoded = json_decode(json_encode($current_balance),true);
+    $current_balance_value = $current_balance_decoded[0]['balance'];
+    $balance_to_pass['balance_to_change'] = $current_balance_value;
+    wp_enqueue_script( 'php-to-js','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/change_max_form_value.js', array( 'jquery' ), null, true );
+    wp_localize_script( 'php-to-js', 'balance_to_pass', $balance_to_pass );
+ }
+}
+*/
+
+add_action('wp', 'page_check');
+function page_check() {
+    if (is_page(3099)) {
+        add_action( 'wp_enqueue_scripts', 'php_to_js_enqueue' );
+        function php_to_js_enqueue() {
+            $balance_to_pass = array();
+            global $wpdb;
+            global $user;
+            $user = wp_get_current_user();
+            $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+            $current_balance_decoded = json_decode(json_encode($current_balance),true);
+            $current_balance_value = $current_balance_decoded[0]['balance'];
+            $balance_to_pass['balance_to_change'] = $current_balance_value;
+            wp_enqueue_script( 'php-to-js','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/change_max_form_value.js', array( 'jquery' ), null, true );
+            wp_localize_script( 'php-to-js', 'balance_to_pass', $balance_to_pass );
+         }
+    }
+    if (is_page(3101)) {
+        add_action( 'wp_enqueue_scripts', 'php_to_js_ls_enqueue' );
+        function php_to_js_ls_enqueue() {
+            $balance_to_pass = array();
+            global $wpdb;
+            global $user;
+            $user = wp_get_current_user();
+            $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+            $current_balance_decoded = json_decode(json_encode($current_balance),true);
+            $current_balance_value = $current_balance_decoded[0]['balance'];
+            $balance_to_pass['balance_to_change'] = $current_balance_value;
+            wp_enqueue_script( 'php-to-js-ls','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Lucky%20Stripes/change_max_form_value_ls.js', array( 'jquery' ), null, true );
+            wp_localize_script( 'php-to-js-ls', 'balance_to_pass', $balance_to_pass );
+         }
     }
 }
