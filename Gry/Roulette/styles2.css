@@ -1,0 +1,216 @@
+#roulette_game {
+    width: 450px;
+    height: 450px;
+    margin: 0px auto;
+    position: relative;
+
+}
+
+.ball {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.startButton:hover {
+    opacity: 0.8;
+}
+
+.blur{
+    animation: blur 10s;
+}
+
+
+.result {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    margin: 20px auto;
+    left: -350px;
+    top: 100px;
+    color: white;
+}
+
+.previousResult {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    margin: 20px auto;
+    left: -350px;
+    top: 150px;
+    color: white;
+}
+
+/* Betting system */
+
+.redWin{
+    display: flex;
+    position: absolute;
+    top: 300px;
+    left: 500px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-color: red;
+}
+.greenWin{
+    display: flex;
+    position: absolute;
+    top: 300px;
+    left: 550px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-color: green;
+}
+.blackWin{
+    display: flex;
+    position: absolute;
+    top: 300px;
+    left: 600px;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    background-color: black;
+}
+
+
+.betResult {
+    display: flex;
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    margin: 20px auto;
+    left: -350px;
+    top: 200px;
+    color: white;
+
+}
+
+
+.placeBet{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 50px;
+    border: 1px solid purple;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    margin: 20px auto;
+    
+
+}
+
+#betting{
+    display: block;
+    position: absolute;
+    top: 525px;
+    left: 100px;
+}
+
+.yourBet{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 50px;
+    border: 1px solid purple;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+    margin: 20px auto;
+    left: 350px;
+    top: -250px;
+}
+
+.confirmBet{
+    display: block;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    width: 200px;
+    height: 50px;
+    border: 1px solid purple;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+    margin: 20px auto;
+    left: 0px;
+    top: 0px;
+
+}
+
+
+.yourMoney{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: gold;
+    width: 200px;
+    height: 50px;
+    border: 1px solid yellow;
+    border-radius: 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: white;
+    margin: 20px auto;
+    left: 350px;
+    top: -450px;
+}
+   
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
