@@ -12,11 +12,11 @@ var rightIMG;
 
 //images 
 var images = [];
-images[0] = './assets/coin_2.png';
-images[1] = './assets/fruit_2.png';
-images[2] = './assets/bell_2.png';
+images[0] = 'https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/coin_2.png';
+images[1] = 'https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/fruit_2.png';
+images[2] = 'https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/bell_2.png';
 
-$("#submitButton").attr("disabled", true);
+jQuery("#submitButton").attr("disabled", false);
 
 var time = 300;
 var i = 0;
@@ -24,17 +24,9 @@ var j = 0;
 var form;
 
 
-startButton.addEventListener('click', () => {
-showLeftImage();
-showMiddleImage();
-showRightImage();
-});
-
 function showLeftImage(){
-  //  console.log(j);
     leftImage.src=images[i];
     leftIMG = Math.floor(0 + Math.random() * 3);
-  //  console.log(leftIMG);
     leftImage.src = images[leftIMG];
     if(j<15){
     setTimeout(showLeftImage, time);
@@ -46,10 +38,8 @@ function showLeftImage(){
 }
 
 function showMiddleImage(){
-    console.log(j);
     middleImage.src=images[i];
     middleIMG = Math.floor(0 + Math.random() * 3);
-    console.log(middleIMG);
     middleImage.src = images[middleIMG];
     if(j<20){
     setTimeout(showMiddleImage, time);
@@ -95,10 +85,12 @@ function showResult(leftIMG, middleIMG, rightIMG){
 
 
       });
+      betResult.style.backgroundColor="gold";
     }
-    else
+    else{
       betResult.innerHTML = "You've lost!";
-
+      betResult.style.backgroundColor="brown";
+    }
       $("#submitButton").attr("disabled", false);
 }
 
@@ -107,6 +99,9 @@ function showResult(leftIMG, middleIMG, rightIMG){
 jQuery('#betting').submit(function(){
   event.preventDefault();
   $("#submitButton").attr("disabled", true);
+  showLeftImage();
+  showMiddleImage();
+  showRightImage();
   var link="https://dev-virtualcasino.pantheonsite.io/wp-admin/admin-ajax.php";
   form=jQuery('#betting').serialize();    
   var formData = new FormData;
