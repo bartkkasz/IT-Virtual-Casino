@@ -3,7 +3,6 @@
     const result = document.querySelector('.result');
     const ball = document.querySelector('.ball');
     const previousResult = document.querySelector('.previousResult');
-    
 
     let parts = 15;
     let deg = 0;

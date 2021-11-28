@@ -12,22 +12,6 @@
         height: 500px;
         width: 1000px;
     }
-    .startButton {
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    background-color:darkmagenta;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width:  150px;
-    height: 35px;
-    top: -1225px;
-    left: -100px;
-    margin: -40px auto;
-    cursor: pointer;
-    z-index: 2;  
-    color: white;
-    }
 
     .leftImage{
         display: flex;
@@ -51,7 +35,6 @@
         position: relative;
         top: -1270px;
         left: 650px;
-        transition: ;
     }
 
     .betResult{
@@ -68,24 +51,33 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: 2rem;
             margin: 20px auto;
-            left: 400px;
+            left: 100px;
             top: 40px;
             color: white;
         }
+    .yourMoney{
+            z-index: 2;
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            background-color: gold;
+            width: 200px;
+            height: 40px;
+            border: 1px solid yellow;
+            border-radius: 20px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2rem;
+            margin: 20px auto;
+            left: 200px;
+            top: -1680px;
+            color: white;
+        }
+    #betting{
+    display: block;
+    position: absolute;
+    top: 455px;
+    left: 400px;
+}
 
-    @keyframes up-down {
-        from {
-            transform: translateY(-50px);
-          }
-          to {
-            transform: translateY(125px);
-          }
-          0% {opacity: 1;}
-          25% {opacity: 1;}
-          50% {opacity: 1;}
-          75% {opacity: 1;}
-          95% {opacity: 0.5;}
-          97% {opacity: 0;}
-          100% {opacity: 0;}
-        
-    }
