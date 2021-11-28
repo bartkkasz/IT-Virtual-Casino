@@ -71,6 +71,8 @@ function showRightImage(){
     }
     else if(j==20) {
     showResult(leftIMG,middleIMG,rightIMG);
+    rightImage.style.transition = 'all 1s linear';
+    rightImage.style.transform = `rotate(${1}deg)`;
     j = 0;
     }
 }
