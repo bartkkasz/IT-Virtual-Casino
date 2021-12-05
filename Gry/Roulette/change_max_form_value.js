@@ -1,12 +1,12 @@
 var input = document.getElementById("betAmount");
 var betResultColor = document.querySelector('.betResult')
 var yourBetForm = document.querySelector('.yourBet');
-
+var wheelImage = document.querySelector('.wheel');
 var user_balance;
 var current_balance_max;
 var colorbet;
 var betAmount;
-
+var wheelIMG;
 var redWins = document.querySelector('.redWin');
 var blackWins = document.querySelector('.blackWin');
 var greenWins = document.querySelector('.greenWin');
@@ -14,10 +14,22 @@ var greenWins = document.querySelector('.greenWin');
 var yourMoney = document.querySelector('.yourMoney');
 
 jQuery( document ).ready(function($) {
-user_balance = balance_to_pass.balance_to_change;
+console.log(data_to_pass);
+var data = Object.values(data_to_pass);
+user_balance = data[0];
+wheelIMG = data[1];
 current_balance_max = user_balance;
 input.setAttribute("max",user_balance);
 yourMoney.innerHTML = current_balance_max;
+
+if(wheelIMG==1){
+
+    wheelImage.src = "https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/rouletteWheel.png";
+}
+else if(wheelIMG==2){
+    wheelImage.src = "https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/rouletteWheel2.png";
+}
+
 });
 
 

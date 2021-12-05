@@ -9,7 +9,7 @@ var previousResult = document.querySelector('.previousResult');
 var leftIMG;
 var middleIMG;
 var rightIMG;
-
+var resultColor;
 //images 
 var images = [];
 images[0] = 'https://dev-virtualcasino.pantheonsite.io/wp-content/uploads/2021/11/coin_2.png';
@@ -88,8 +88,10 @@ function showResult(leftIMG, middleIMG, rightIMG){
 
       });
       betResult.style.backgroundColor="gold";
+      resultColor = "gold";
     }
     else{
+      resultColor = "brown";
       betResult.innerHTML = "You've lost!";
       betResult.style.backgroundColor="brown";
     }
@@ -100,6 +102,8 @@ function showResult(leftIMG, middleIMG, rightIMG){
 function revertState(){
   rightImage.style.transition = 'all 0s linear';
   rightImage.style.transform = `rotate(${0}deg)`;
+  previousResult.innerHTML = betResult.innerHTML;
+  previousResult.style.backgroundColor = resultColor;
   betResult.innerHTML = "-";
   betResult.style.backgroundColor="darkmagenta";
   $("#submitButton").attr("disabled", false);

@@ -177,12 +177,21 @@ require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
 
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                                /* BETTING SYSTEM */
+
 add_action('wp_ajax_betAmount','ajax_betAmount');
-
 add_action('wp_ajax_betWin', 'ajax_betWin');
-
 add_action('wp_ajax_betWinGreen', 'ajax_betWinGreen');
-
 
 function ajax_betAmount(){
 	$arr=[];
@@ -200,7 +209,6 @@ function ajax_betAmount(){
     $result=$wpdb->update($table,["balance"=>$balance_to_set], $data_where);
     }
 }
-
 
 function ajax_betWin(){
     $arr=[];
@@ -237,54 +245,119 @@ function ajax_betWinGreen(){
     $result=$wpdb->update($table,["balance"=>$balance_to_set], $data_where);
     }
 }
-/*
-if(is_page(1)){
-add_action( 'wp_enqueue_scripts', 'php_to_js_enqueue' );
-function php_to_js_enqueue() {
-    $balance_to_pass = array();
+
+
+
+add_action('wp_ajax_changeWheelImage', 'ajax_changeWheelImage');
+
+    function ajax_changeWheelImage(){
+    $wheelImage = $_POST['wheelIMG'];
+    $balance_to_remove = $_POST['balance_to_remove'];
     global $wpdb;
     global $user;
-	$user = wp_get_current_user();
+    $user = wp_get_current_user();
+    $table = 'wp_users';
+    $data_where = array('ID'=>$user->ID);
+    $result=$wpdb->update($table,["WheelImage"=>$wheelImage], $data_where);
     $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
     $current_balance_decoded = json_decode(json_encode($current_balance),true);
     $current_balance_value = $current_balance_decoded[0]['balance'];
-    $balance_to_pass['balance_to_change'] = $current_balance_value;
-    wp_enqueue_script( 'php-to-js','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/change_max_form_value.js', array( 'jquery' ), null, true );
-    wp_localize_script( 'php-to-js', 'balance_to_pass', $balance_to_pass );
- }
-}
-*/
+    $wpdb->update($table, ["balance"=>$current_balance_value-$balance_to_remove], $data_where);
+    }
+
+add_action('wp_ajax_prizeShopBuy', 'ajax_prizeShopBuy');
+
+    function ajax_prizeShopBuy(){
+        $column = $_POST['column'];
+        print_r($column);
+        global $wpdb;
+        global $user;
+        $user = wp_get_current_user();
+        $res = $wpdb->query($wpdb->prepare("UPDATE prize_shop SET $column = 1 WHERE ID = $user->ID"));
+    }
+
+
+                /* PASS PHP VARIABLE TO JAVASCRIPT, MAKE SURE IT WORKS ONLY ON A SPECIFIC PAGE */
+                // 3099 - Roulette      //
+                // 3101 - Lucky Stripes //
+                // 47   - Prize Shop    //
+                // 3244 - After Login   //
 
 add_action('wp', 'page_check');
+
 function page_check() {
     if (is_page(3099)) {
         add_action( 'wp_enqueue_scripts', 'php_to_js_enqueue' );
         function php_to_js_enqueue() {
-            $balance_to_pass = array();
-            global $wpdb;
-            global $user;
-            $user = wp_get_current_user();
-            $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
-            $current_balance_decoded = json_decode(json_encode($current_balance),true);
-            $current_balance_value = $current_balance_decoded[0]['balance'];
-            $balance_to_pass['balance_to_change'] = $current_balance_value;
-            wp_enqueue_script( 'php-to-js','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/change_max_form_value.js', array( 'jquery' ), null, true );
-            wp_localize_script( 'php-to-js', 'balance_to_pass', $balance_to_pass );
+        $balance_to_pass = array();
+        $wheelImage_to_pass = array();
+        global $wpdb;
+        global $user;
+        $user = wp_get_current_user();
+        $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+        $current_balance_decoded = json_decode(json_encode($current_balance),true);
+        $current_balance_value = $current_balance_decoded[0]['balance'];
+        $balance_to_pass['balance_to_change'] = $current_balance_value;
+        $current_Wheel_Image = $wpdb->get_results($wpdb->prepare("SELECT WheelImage FROM wp_users WHERE ID = $user->ID"));
+        $current_Wheel_Image_decoded = json_decode(json_encode($current_Wheel_Image), true);
+        $current_Wheel_Image_value = $current_Wheel_Image_decoded[0]['WheelImage'];
+        $wheelImage_to_pass['wheelImage_to_change'] = $current_Wheel_Image_value;
+        $data_to_pass = array_merge($balance_to_pass, $wheelImage_to_pass);
+        wp_enqueue_script( 'php-to-js','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Roulette/change_max_form_value.js', array( 'jquery' ), null, true );
+        wp_localize_script( 'php-to-js', 'data_to_pass', $data_to_pass );
          }
     }
     if (is_page(3101)) {
         add_action( 'wp_enqueue_scripts', 'php_to_js_ls_enqueue' );
         function php_to_js_ls_enqueue() {
-            $balance_to_pass = array();
-            global $wpdb;
-            global $user;
-            $user = wp_get_current_user();
-            $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
-            $current_balance_decoded = json_decode(json_encode($current_balance),true);
-            $current_balance_value = $current_balance_decoded[0]['balance'];
-            $balance_to_pass['balance_to_change'] = $current_balance_value;
-            wp_enqueue_script( 'php-to-js-ls','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Lucky%20Stripes/change_max_form_value_ls.js', array( 'jquery' ), null, true );
-            wp_localize_script( 'php-to-js-ls', 'balance_to_pass', $balance_to_pass );
+        $balance_to_pass = array();
+        global $wpdb;
+        global $user;
+        $user = wp_get_current_user();
+        $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+        $current_balance_decoded = json_decode(json_encode($current_balance),true);
+        $current_balance_value = $current_balance_decoded[0]['balance'];
+        $balance_to_pass['balance_to_change'] = $current_balance_value;
+        wp_enqueue_script( 'php-to-js-ls','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/Lucky%20Stripes/change_max_form_value_ls.js', array( 'jquery' ), null, true );
+        wp_localize_script( 'php-to-js-ls', 'balance_to_pass', $balance_to_pass );
          }
     }
+    if (is_page(47)){
+        add_action( 'wp_enqueue_scripts', 'php_to_js_prizeshop_enqueue' );
+        function php_to_js_prizeshop_enqueue() {
+        $balance_to_pass = array();
+        $avaliable_wheel_choices = array();
+        global $wpdb;
+        global $user;
+        $user = wp_get_current_user();
+        $current_balance = $wpdb->get_results($wpdb->prepare("SELECT balance FROM wp_users WHERE ID = $user->ID"));
+        $current_balance_decoded = json_decode(json_encode($current_balance),true);
+        $current_balance_value = $current_balance_decoded[0]['balance'];
+        $balance_to_pass['balance_to_change'] = $current_balance_value;
+        
+        $wheel_choices_to_pass = $wpdb->get_results($wpdb->prepare("SELECT * FROM prize_shop WHERE ID = $user->ID"));
+        
+        $selected_wheel = $wpdb->get_results($wpdb->prepare("SELECT WheelImage FROM wp_users WHERE ID = $user->ID"));
+
+        $user_id = $wpdb->get_results($wpdb->prepare("SELECT ID FROM wp_users WHERE ID = $user->ID"));
+
+        wp_enqueue_script( 'php-to-js_prizeshop','https://dev-virtualcasino.pantheonsite.io/wp-content/my-plugins/PrizeShop/prizeshopscript.js', array( 'jquery' ), null, true );
+        wp_localize_script( 'php-to-js_prizeshop', 'balance_to_pass', $balance_to_pass );
+        wp_localize_script( 'php-to-js_prizeshop', 'wheel_choices_to_pass', $wheel_choices_to_pass);
+        wp_localize_script( 'php-to-js_prizeshop', 'selected_Wheel', $selected_wheel);
+        wp_localize_script( 'php-to-js_prizeshop', 'user_id', $user_id);
+
+
+    }
+}
+    if(is_page(3244)){
+        add_action( 'wp_enqueue_scripts', 'php_to_js_afterlogin_enqueue' );
+        function php_to_js_afterlogin_enqueue() {
+        global $wpdb;
+        global $user;
+        $user = wp_get_current_user();
+      //  $user_id = $wpdb->get_results($wpdb->prepare("SELECT ID FROM wp_users WHERE ID = $user->ID"));
+        $res = $wpdb->query($wpdb->prepare("INSERT INTO prize_shop SET ID = $user->ID"));
+    }
+}
 }

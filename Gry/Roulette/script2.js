@@ -92,7 +92,7 @@
         else if (betTextResult == "LOSE"){
             betResult.style.backgroundColor="brown";
         }
-        setTimeout(revertRouletteState, 5000);
+        setTimeout(revertRouletteState, 3000);
 
 
     });
